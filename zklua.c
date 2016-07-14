@@ -1661,6 +1661,24 @@ static int zklua_set_acl(lua_State *L)
     }
 }
 
+static int zklua_get_acl_open_unsafe(lua_State *L)
+{
+    _zklua_build_acls(L, &ZOO_OPEN_ACL_UNSAFE);
+    return 1;
+}
+
+static int zklua_get_acl_read_unsafe(lua_State *L)
+{
+    _zklua_build_acls(L, &ZOO_READ_ACL_UNSAFE);
+    return 1;
+}
+
+static int zklua_get_acl_create_all(lua_State *L)
+{
+    _zklua_build_acls(L, &ZOO_CREATOR_ALL_ACL);
+    return 1;
+}
+
 static const luaL_Reg zklua[] =
 {
     {"init", zklua_init},
@@ -1705,6 +1723,10 @@ static const luaL_Reg zklua[] =
     {"get_children2", zklua_get_children2},
     {"get_acl", zklua_get_acl},
     {"set_acl", zklua_set_acl},
+
+    {"get_acl_open_unsafe", zklua_get_acl_open_unsafe},
+    {"get_acl_read_unsafe", zklua_get_acl_read_unsafe},
+    {"get_acl_create_all", zklua_get_acl_create_all},
     {NULL, NULL}
 };
 
